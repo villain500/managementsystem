@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block body %}
+  <div class="container my-4 ">
+    <div class="card card-sm py-3 px-3">
+      <h4>Products</h4>
+      <table class="table table-sm">
+        <tr>
+          <th>Product</th>
+          <th>Category</th>
+          <th>Price</th>
+        </tr>
+        {% for items in products %}
+          <tr>
+            <th>{{items.Name}}</th>
+            <th>{{items.category}}</th>
+            <th>{{items.price}}</th>
+          </tr>
+        {% endfor %}
+      </table>
+    </div>
+  </div>
+{% endblock body %}

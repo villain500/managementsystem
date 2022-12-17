@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block body %}
+<div class="container">
+
+  <div class="row">
+    <div class="col-md-4">
+      <div class="card text-center card-sm py-3 px-3">
+        <h4 class="my-3">Customer:</h4>
+        <a class="btn btn-success my-2 w-100" href="#">Update Customer</a>
+        <a class="btn btn-outline-danger w-100" href="{% url 'create_order' customer.id %}">Place Order</a>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card text-center py-3 card-sm">
+        <h4 class="my-3">Contact Information:</h4>
+        Email: {{customer.Email}} <br>
+        Phone: {{customer.Phone}}
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card text-center card-sm">
+        <h4 class="my-3">Total Orders:</h4>
+        <p class="text-muted">{{order_count}}</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="card card-sm px-3 py-3">
+      <button class="btn btn-primary btn-sm w-25">Search</button>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="card card-sm">
+      <table class="table table-sm py-3 px-3">
+        <tr>
+          <th>Product</th>
+          <th>Category</th>
+          <th>Date Ordered</th>
+          <th>Status</th>
+          <th>Update</th>
+          <th>Remove</th>
+        </tr>
+        {% for items in orders %}
+        <tr>
+          <td>{{items.product.Name}}</td>
+          <td>{{items.product.category}}</td>
+          <td>{{items.Date_Created}}</td>
+          <td>{{items.status}}</td>
+          <th><a class="btn btn-primary" href="{% url 'update_order' items.id %}">Update</a></th>
+          <th><a class="btn btn-danger" href="{% url 'delete_order' items.id %} ">Delete</a></th>
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
+  </div>
+
+</div>
+{% endblock body %}

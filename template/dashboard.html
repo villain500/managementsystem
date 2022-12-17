@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block body %}
+{% for message in messages %}
+  {{message}}
+{% endfor %}
+{% include "status.html" %}
+  <div class="container">
+    <div class="row">
+      <div class="col-md-5" >
+        <h4><strong>Customers:</strong></h4>
+        <a href="#"><h6 style="text-align: center; background-color: blue; color: white;">Customers</h6></a>
+        <div class="card card-body">
+          <table class="table table-sm">
+          <tr>
+            <th> Customers</th>
+            <th> Phone Number</th>
+          </tr>
+          {% for items in customers %}
+          <tr>
+            <td>{{items.Name}}</td>
+            <td>{{items.Phone}}</td>
+            <td><a class="btn btn-info" href="{% url 'customers' items.id %}">View</a></td>
+          </tr>
+          {% endfor %}
+        </table>
+        </div>
+      </div>
+      <div class="col-md-7">
+        <h4><strong>last 5 orders:</strong></h4>
+        {% comment %} <a href="{% url 'create_order' %}"><h6 style="text-align: center; background-color: blue; color: white;">Create order</h6></a> {% endcomment %}
+        <div class="card card-body">
+        <table class="table table-sm">
+          <tr>
+            <th> Product</th>
+            <th> Dated Ordered</th>
+            <th> Status</th>
+            <th> Update</th>
+            <th> Remove</th>
+          </tr>
+          {% for items in order %}
+            <tr>
+              <th>{{items.product.Name}}</th>
+              <th>{{items.Date_Created}}</th>
+              <th>{{items.status}}</th>
+              <th><a class="btn btn-primary" href="{% url 'update_order' items.id %}">Update</a></th>
+              <th><a class="btn btn-danger" href="{% url 'delete_order' items.id %} ">Delete</a></th>
+            </tr>
+          {% endfor %}
+        </table>
+      </div>
+      </div>
+    </div>
+  </div>
+{% endblock body %}
